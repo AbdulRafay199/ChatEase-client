@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-4 colstyle">
+        <app-chat-side-nav></app-chat-side-nav>
+    </div>
+    <div class="col-8 colstyle" *ngIf="totalChats>0">
+        <app-chat-box></app-chat-box>
+    </div>
+    <div class="col-8 colstyle" *ngIf="totalChats==0">
+        <app-no-chat-component></app-no-chat-component>
+    </div>
+</div>

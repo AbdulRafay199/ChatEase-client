@@ -1,0 +1,22 @@
+.nochat{
+    background-image: url('https://i.pinimg.com/736x/a8/d8/3a/a8d83ad51cfb486d253508b013d54fb9.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    width: auto;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tagline{
+    color: white;
+    font-size: 1.1rem;
+}
+.sub-tagline{
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+}

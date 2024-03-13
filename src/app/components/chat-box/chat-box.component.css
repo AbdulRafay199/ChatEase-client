@@ -1,0 +1,54 @@
+.userinfo{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    background-color: rgb(245, 245, 245);
+    height: 9dvh;
+}
+
+.chatbox{
+    background-image: url("https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg");
+    background-size: contain;
+    background-blend-mode:multiply;
+    background-color: rgba(255, 174, 0, 0.055);
+    height: 79dvh;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.msginput{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    background-color: rgb(245, 245, 245);
+    height: 12dvh;
+}
+
+.searchinput{
+    width: 90%;
+}
+
+.from-them {
+    float: inline-start;
+    margin-right: auto;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.from-me {
+    float: inline-end;
+    margin-left: auto;
+    background-color: #d0f7d1;
+    color: #000000; 
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}

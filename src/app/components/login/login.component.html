@@ -1,0 +1,7 @@
+<form (ngSubmit)="login()">
+    <div class="d-flex justify-content-center align-items-center flex-column w-25 m-auto mt-5">
+        <input type="email" [(ngModel)]="data.email" name="email" placeholder="Enter your Email" class="form-control mb-3">
+        <input type="password" [(ngModel)]="data.password" name="password" placeholder="Enter your Password" class="form-control mb-3">
+        <button class="btn btn-success w-100" type="submit">Signin</button>
+    </div>
+</form>

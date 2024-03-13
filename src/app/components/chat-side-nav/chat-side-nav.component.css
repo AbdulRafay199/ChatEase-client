@@ -1,0 +1,36 @@
+
+.userinfo{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    background-color: rgb(245, 245, 245);
+    height: 9dvh;
+}
+.searchbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(233, 233, 233);
+}
+.searchinput{
+    width: 90%;
+}
+
+.convo{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    /* background-color: rgb(230, 230, 230); */
+    border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.subject{
+    color: rgb(48, 48, 48);
+}
+.msg{
+    color: rgb(131, 131, 131);
+}

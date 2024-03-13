@@ -1,0 +1,26 @@
+<div class="userinfo p-3">
+    <p-avatar [label]="currentUser.username[0]" class="ms-3" [style]="{ 'background-color': '#2196F3', color: '#ffffff' }" shape="circle"></p-avatar>
+    <h6 class="mb-0 me-auto">{{currentUser.username}}</h6>
+    <div class="dropdown">
+        <button class="btn p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="pi pi-ellipsis-v"></span></button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" (click)="logout()" routerLink="/login" style="cursor: pointer;">Logout</a></li>
+        </ul>
+      </div>
+</div>
+
+<div class="searchbar">
+    <input type="text" class="form-control searchinput m-2" placeholder="Search...">
+</div>
+
+<div class="conversations">
+    <div class="btn convo p-3" *ngFor="let each of conversation" (click)="setRecipientId(each.conversation.p1Id==currentUser.userId?each.conversation.p2Id:each.conversation.p1Id)">
+        <p-avatar [label]="each.otherUserName[0]" class="ms-3" size="large" [style]="{ 'background-color': '#2196' + each.otherUserName[0] + '3', color: '#ffffff' }" shape="circle"></p-avatar>
+        <div class="d-flex justify-content-start align-items-start flex-column me-auto">
+            <h6 class="mb-0 subject">{{each.otherUserName}}</h6>
+            <p class="mb-0 msg">{{each.conversation.lastMessage}}</p>
+        </div>
+        <p class="fw-semibold" style="font-size: 0.9rem;">{{each.conversation.lastActivityTimestamp | time}}</p>
+    </div>
+</div>
+
