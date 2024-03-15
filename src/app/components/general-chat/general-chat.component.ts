@@ -45,4 +45,47 @@ sendmsg(){
   })
 }
 
+recording: boolean = false;
+  recordedAudio!: boolean | string | ArrayBuffer;
+  mediaRecorder!: MediaRecorder;
+  chunks: Blob[] = [];
+
+  toggleRecording() {
+    if (this.recording) {
+      this.stopRecording();
+    } else {
+      this.startRecording();
+    }
+  }
+
+  async startRecording() {
+    try {
+      this.recording = true;
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      this.mediaRecorder = new MediaRecorder(stream);
+
+      this.chunks = [];
+      this.mediaRecorder.ondataavailable = (event) => {
+        this.chunks.push(event.data);
+      };
+
+      this.mediaRecorder.onstop = () => {
+        this.recording = false;
+        const blob = new Blob(this.chunks, { type: 'audio/wav' });
+        this.recordedAudio = window.URL.createObjectURL(blob);
+      };
+
+      this.mediaRecorder.start();
+    } catch (error) {
+      console.error('Error recording audio:', error);
+    }
+  }
+
+  stopRecording() {
+    if (this.mediaRecorder && this.mediaRecorder.state === 'recording') {
+      this.mediaRecorder.stop();
+      console.log("Audio: ",this.recordedAudio)
+    }
+  }
+
 }

@@ -31,6 +31,15 @@ export class AuthService {
       );
   }
 
+  GetAllUsers(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.domain}`, {observe: 'response' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError({ status: error.status, message: error.error }); // Forward the error to the caller
+        })
+      );
+  }
+
   GetUserById(id: any): Observable<any> {
     return this.http.post<any>(`${this.domain}/getbyid`,id)
       .pipe(

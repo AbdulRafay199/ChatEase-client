@@ -1,5 +1,5 @@
 <div class="userinfo p-3">
-    <p-avatar [label]="recipient.name[0]" class="ms-2" [style]="{ 'background-color': '#2196' + recipient.name[0] + '3', color: '#ffffff' }" shape="circle"></p-avatar>
+    <p-avatar [label]="recipient.name[0]?recipient.name[0].toUpperCase():recipient.name[0]" class="ms-2" [style]="{ 'background-color': getAvatarColor(recipient.id), color: '#ffffff' }" shape="circle"></p-avatar>
     <h6 class="mb-0">{{recipient.name}}</h6>
 </div>
 
@@ -21,7 +21,7 @@
 </div>
 
 <div class="msginput p-3">
-    <input type="text" [(ngModel)]="body.msg" class="form-control searchinput m-2" placeholder="Send message...">
+    <input type="text" [(ngModel)]="body.msg" (keydown.enter)="onEnter($event)" class="form-control searchinput m-2" placeholder="Send message...">
     <button class="btn p-0" (click)="sendmsg()"><span class="pi pi-send fs-4" style="transform: rotate(40deg);"></span></button>
 </div>
 

@@ -28,6 +28,17 @@
     border-bottom: 1px solid rgb(233, 233, 233);
 }
 
+.convo:hover{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    /* background-color: rgb(230, 230, 230); */
+    border-bottom: 1px solid rgb(233, 233, 233);
+    background-color: rgb(247, 247, 247);
+}
+
 .subject{
     color: rgb(48, 48, 48);
 }

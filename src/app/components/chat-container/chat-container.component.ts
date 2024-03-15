@@ -16,12 +16,15 @@ import { NoChatComponentComponent } from "../no-chat-component/no-chat-component
 export class ChatContainerComponent implements OnInit {
 
     store = inject(Store)
-    totalChats = 0
+    totalChats = false
 
     ngOnInit(): void {
-        this.store.select('chat').subscribe(data=>{
-            this.totalChats = data.length
-            console.log(this.totalChats)
+        this.store.select('recipient').subscribe(data=>{
+            console.log(data)
+            if(data.id!=0){
+                this.totalChats = true
+            }
+            // this.totalChats = data.length
         })
     }
 

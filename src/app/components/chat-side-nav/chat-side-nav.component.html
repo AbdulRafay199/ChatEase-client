@@ -1,6 +1,7 @@
 <div class="userinfo p-3">
-    <p-avatar [label]="currentUser.username[0]" class="ms-3" [style]="{ 'background-color': '#2196F3', color: '#ffffff' }" shape="circle"></p-avatar>
+    <p-avatar [label]="currentUser.username[0]?currentUser.username[0].toUpperCase():currentUser.username[0]" class="ms-3" [style]="{ 'background-color': getAvatarColor(currentUser.userId), color: '#ffffff' }" shape="circle"></p-avatar>
     <h6 class="mb-0 me-auto">{{currentUser.username}}</h6>
+    <button class="btn p-1" type="button" (click)="showDialog()" label="Show"><span class="pi pi-plus"></span></button>
     <div class="dropdown">
         <button class="btn p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="pi pi-ellipsis-v"></span></button>
         <ul class="dropdown-menu">
@@ -14,13 +15,36 @@
 </div>
 
 <div class="conversations">
-    <div class="btn convo p-3" *ngFor="let each of conversation" (click)="setRecipientId(each.conversation.p1Id==currentUser.userId?each.conversation.p2Id:each.conversation.p1Id)">
-        <p-avatar [label]="each.otherUserName[0]" class="ms-3" size="large" [style]="{ 'background-color': '#2196' + each.otherUserName[0] + '3', color: '#ffffff' }" shape="circle"></p-avatar>
+    <div class="btn convo p-3" *ngFor="let each of conversation" (click)="setRecipientId(each.p1Id==currentUser.userId?each.p2Id:each.p1Id,each.id)">
+        <p-avatar [label]="each.otherUserName[0]?each.otherUserName[0].toUpperCase():each.otherUserName[0]" class="ms-3" size="large" [style]="{ 'background-color': getAvatarColor(each.p1Id==currentUser.userId?each.p2Id:each.p1Id), color: '#ffffff' }" shape="circle"></p-avatar>
         <div class="d-flex justify-content-start align-items-start flex-column me-auto">
             <h6 class="mb-0 subject">{{each.otherUserName}}</h6>
-            <p class="mb-0 msg">{{each.conversation.lastMessage}}</p>
+            <p class="mb-0 msg" [ngClass]="SetNotifyStyle(each)">{{each.lastMessage}}</p>
         </div>
-        <p class="fw-semibold" style="font-size: 0.9rem;">{{each.conversation.lastActivityTimestamp | time}}</p>
+        <div class="d-flex justify-content-start align-items-end flex-column">
+            <p class="fw-semibold ms-0 mb-0" style="font-size: 0.9rem;">{{each.lastActivityTimestamp | time}}</p>
+            <div *ngIf="checkUnreadMsg(each)">
+                <p-badge [value]="getUnreadMsgLength(each)" severity="success"></p-badge>
+            </div>
+        </div>
     </div>
 </div>
+
+
+<p-dialog header="New Chat" [(visible)]="visible" [modal]="true" [breakpoints]="{ '960px': '85vw' }" [draggable]="false" [resizable]="false" [style]="{width: '40vw',height:'300px', border:'0px',borderRadius:'50px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'}">
+    <ng-template pTemplate="header">
+        <div class="searchbar w-100">
+            <input type="text" class="form-control searchinput w-100 m-2" placeholder="Search...">
+        </div>
+    </ng-template>
+
+    <div class="conversations">
+        <div class="btn convo py-3" *ngFor="let each of allUsers" (click)="setRecipientId(each.id,0)" (click)="hideDialog()">
+            <p-avatar [label]="each.name[0]?each.name[0].toUpperCase():each.name[0]" class="ms-3" size="large" [style]="{ 'background-color': getAvatarColor(each.id), color: '#ffffff' }" shape="circle"></p-avatar>
+            <div class="d-flex justify-content-start align-items-start flex-column me-auto">
+                <h6 class="mb-0 subject">{{each.name}}</h6>
+            </div>
+        </div>
+    </div>
+</p-dialog>
 

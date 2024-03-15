@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Store } from '@ngrx/store';
 import { ConversationService } from './services/conversation/conversation.service';
@@ -19,6 +19,7 @@ export class AppComponent {
   
   private hubConnectionBuilder!: HubConnection;
 
+  router = inject(Router)
   store = inject(Store)
   chatService = inject(ConversationService)
 
@@ -33,6 +34,10 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+    const token = localStorage.getItem("token")
+    if(!token){
+      this.router.navigateByUrl('/login')
+    }
 
     this.store.select('recipient').subscribe(data=>{
       // console.log("recipient store: ", data)

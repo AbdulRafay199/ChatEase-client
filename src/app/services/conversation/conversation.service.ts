@@ -39,5 +39,23 @@ export class ConversationService {
       );
   }
 
+  readMsgs(id: number,token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<any>(`${this.domain}/deleteallbutlast/${id}`,{headers, observe: 'response' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError({ status: error.status, message: error.error }); // Forward the error to the caller
+        })
+      );
+  }
+
+  readMsgsWithUserId(id: number,userId: number): Observable<any> {
+    return this.http.delete<any>(`${this.domain}/deleteall/${id}/${userId}`)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError({ status: error.status, message: error.error }); // Forward the error to the caller
+        })
+      );
+  }
 
 }
